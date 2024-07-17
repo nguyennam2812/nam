@@ -1,0 +1,1 @@
+view terminal > code .\ten file > pip install dash > python .\ten file >
