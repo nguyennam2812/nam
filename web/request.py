@@ -40,9 +40,9 @@ def create_request_page():
                             dcc.Dropdown(
                                 id="function",
                                 options=[
-                                    {'label': 'Option 1', 'value': 'option1'},
-                                    {'label': 'Option 2', 'value': 'option2'},
-                                    {'label': 'Option 3', 'value': 'option3'}
+                                    {'label': 'Transformation', 'value': 'Transformation'},
+                                    {'label': 'BA', 'value': 'BA'},
+                                    {'label': 'Engineer', 'value': 'Engineer'}
                                 ],
                                 className="input-field"
                             )
@@ -90,30 +90,3 @@ def add_request_callback(app):
         if data:
             return '/confirmation'
         return '/request-access'
-
-from flask import Flask, render_template, request, redirect, url_for
-
-app = Flask(__name__)
-
-# Dữ liệu mẫu
-users = [
-    {'email': 'aly.meixell@orionworldwide.com', 'first_name': 'Aly', 'last_name': 'Meixell', 'role': 'User', 'status': 'Inactive'},
-    {'email': 'kimberly.housley@orionworldwide.com', 'first_name': 'Kimberly', 'last_name': 'Housley', 'role': 'User', 'status': 'Inactive'}
-]
-
-@app.route('/')
-def index():
-    return render_template('index.html', users=users)
-
-@app.route('/add_user', methods=['POST'])
-def add_user():
-    email = request.form['email']
-    first_name = request.form['first_name']
-    last_name = request.form['last_name']
-    role = request.form['role']
-    status = request.form['status']
-    users.append({'email': email, 'first_name': first_name, 'last_name': last_name, 'role': role, 'status': status})
-    return redirect(url_for('index'))
-
-if __name__ == '__main__':
-    app.run(debug=True)
