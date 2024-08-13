@@ -1,9 +1,9 @@
 from dash import Dash, html, dcc
 from dash.dependencies import Input, Output, State
 import pandas as pd
-import request
+import request  # Import module request để dùng các hàm create_request_page và add_request_callback
 import dash
-from confirmation import create_confirmation_page
+
 
 # Khởi tạo ứng dụng Dash với suppress_callback_exceptions và CSS bên ngoài
 app = Dash(__name__, suppress_callback_exceptions=True, external_stylesheets=['assets/styles.css'])
@@ -19,7 +19,6 @@ home_page = html.Div(
 
 # Nội dung trang yêu cầu truy cập từ request.py
 request_access_page = request.create_request_page()
-
 
 # Định nghĩa layout với các trang khác nhau
 app.layout = html.Div(
