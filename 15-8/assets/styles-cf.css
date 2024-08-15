@@ -1,0 +1,18 @@
+/* Đảm bảo các nút nằm trên cùng một hàng */
+.btn-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Thêm đường gạch phía dưới */
+.btn-row .btn {
+    border-bottom: 2px solid #dee2e6; /* Chỉnh màu và độ dày của đường gạch */
+    border-radius: 0; /* Loại bỏ bo góc để đường gạch không bị cong */
+}
+
+/* Thay đổi màu sắc và kích thước của các nút */
+.btn-primary {
+    font-weight: bold;
+    font-size: 1rem;
+    color: #ffffff; /* Màu chữ */
+}
