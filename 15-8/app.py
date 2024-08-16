@@ -1,4 +1,4 @@
-from dash import Dash, html, dcc
+from dash import Dash, html, dcc, no_update
 from dash.dependencies import Input, Output, State
 import pandas as pd
 import request
@@ -9,15 +9,29 @@ app = Dash(__name__, suppress_callback_exceptions=True, external_stylesheets=['a
 
 # Nội dung trang chính
 home_page = html.Div(
+    className='home-request-page',
     children=[
-        html.H1(children="Log in to Fora"),
-        html.Button(children="Continue with SSO", className="button button-primary"),
-        html.Button(children="Request Access", id='request-access-button', className="button button-secondary")
+        html.Div(
+            className='home-request-page-container',
+            children=[
+                html.H1(children="Log in to Fora"),
+                html.Button(children="Continue with SSO", className="button button-primary"),
+                html.Button(children="Request Access", id='request-access-button', className="button button-secondary")
+            ]
+        )
     ]
 )
 
 # Nội dung trang yêu cầu truy cập từ request.py
-request_access_page = request.create_request_page()
+request_access_page = html.Div(
+    className='home-request-page',
+    children=[
+        html.Div(
+            className='home-request-page-container',
+            children=request.create_request_page().children
+        )
+    ]
+)
 
 # Định nghĩa layout với các trang khác nhau
 app.layout = html.Div(
@@ -36,7 +50,9 @@ app.layout = html.Div(
     [State('form-data', 'data')]
 )
 def display_page(pathname, data):
-    if pathname == '/request-access':
+    if pathname == '/' or pathname is None:
+        return home_page
+    elif pathname == '/request-access':
         return request_access_page
     elif pathname == '/confirmation':
         if data:
@@ -45,7 +61,7 @@ def display_page(pathname, data):
     else:
         return home_page
 
-# Callback để cập nhật URL và lưu dữ liệu khi nhấn nút
+# Kết hợp các callback để cập nhật URL
 @app.callback(
     Output('url', 'pathname'),
     [Input('request-access-button', 'n_clicks'),
@@ -57,13 +73,13 @@ def update_url(request_clicks, submit_clicks, data):
     ctx = dash.callback_context
     
     if not ctx.triggered:
-        return '/'
+        return no_update
     
     trigger_id = ctx.triggered[0]['prop_id'].split('.')[0]
     
     if trigger_id == 'request-access-button' and request_clicks:
         return '/request-access'
-    elif trigger_id == 'submit-button' and data:
+    elif trigger_id == 'submit-button' and submit_clicks and data:
         # Lưu dữ liệu form vào file CSV
         df = pd.DataFrame([data])
         try:
@@ -74,7 +90,7 @@ def update_url(request_clicks, submit_clicks, data):
         df.to_csv('form_data.csv', index=False)
         return '/confirmation'
     
-    return '/'
+    return no_update
 
 # Thêm các callback từ module request
 request.add_request_callback(app)

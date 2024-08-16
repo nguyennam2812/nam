@@ -1,18 +1,158 @@
-/* Đảm bảo các nút nằm trên cùng một hàng */
-.btn-row {
-    display: flex;
-    justify-content: space-between;
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
 }
 
-/* Thêm đường gạch phía dưới */
-.btn-row .btn {
-    border-bottom: 2px solid #dee2e6; /* Chỉnh màu và độ dày của đường gạch */
-    border-radius: 0; /* Loại bỏ bo góc để đường gạch không bị cong */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
-/* Thay đổi màu sắc và kích thước của các nút */
-.btn-primary {
+/* Header Styles */
+h1 {
+    font-size: 2.5rem;
     font-weight: bold;
+    color: #343a40;
+    margin-bottom: 0.5rem;
+}
+
+h2 {
+    font-size: 1.25rem;
+    color: #6c757d;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+}
+
+/* Tabs Styles */
+.tabs {
+    display: flex;
+    border-bottom: 1px solid #dee2e6;
+    margin-bottom: 1.5rem;
+}
+
+.tabs button {
+    background: none;
+    border: none;
+    padding: 10px 20px;
     font-size: 1rem;
-    color: #ffffff; /* Màu chữ */
+    color: #6c757d;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+}
+
+.tabs button.active {
+    color: #007bff;
+    border-bottom-color: #007bff;
+}
+
+/* Search Bar Styles */
+.search-bar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+    border: 1px solid #ced4da;
+    padding: 5px;
+    background-color: #f1f3f5;
+}
+
+.search-bar input[type="text"] {
+    flex: 1;
+    padding: 5px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+
+.search-bar button {
+    background-color: #007bff;
+    border: none;
+    padding: 8px 12px;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-left: 5px;
+}
+
+/* Button Styles */
+.button-group {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+}
+
+.button-group button {
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+    padding: 8px 12px;
+    margin-left: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.button-group button.delete {
+    background-color: #343a40;
+}
+
+.button-group button.export {
+    background-color: #e9ecef;
+    color: #343a40;
+    border: 1px solid #ced4da;
+}
+
+/* Table Styles */
+.table-container {
+    margin-top: 1rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th {
+    text-align: left;
+    padding: 12px 15px;
+    background-color: #f1f3f5;
+    border-bottom: 1px solid #dee2e6;
+    color: #495057;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #dee2e6;
+    color: #495057;
+}
+
+table td button {
+    background-color: #6c757d;
+    border: none;
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85rem;
+}
+
+table td button.review {
+    background-color: transparent;
+    color: #007bff;
+    font-size: 0.85rem;
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+/* Checkbox Styles */
+input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
 }
